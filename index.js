@@ -1,10 +1,17 @@
 
 const TelegramBot = require('node-telegram-bot-api');
 
+const express = require('express');
+const cors = require('cors')
+
 const token = '6593941783:AAGJChLk-aIPOs0dbAemnGVfUTLrjiTaD44'
 const webAppUrl = 'https://rococo-mandazi-7f34ef.netlify.app'
 
 const bot = new TelegramBot(token, {polling: true});
+const app = express();
+
+app.use(express.json())
+app.use(cors())
 
 bot.on('message', async (msg) => {
 
@@ -25,3 +32,7 @@ bot.on('message', async (msg) => {
   }
 
 });
+
+const PORT = 8000;
+
+app.listen(PORT, () => console.log('server started on PORT' + PORT))
